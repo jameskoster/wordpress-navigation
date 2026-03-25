@@ -95,13 +95,6 @@ export const coreNavItems: NavItem[] = [
         section: "core",
       },
       {
-        id: "posts-add",
-        label: "Add New",
-        icon: FilePlus,
-        href: "/posts/add-new",
-        section: "core",
-      },
-      {
         id: "posts-categories",
         label: "Categories",
         icon: FolderOpen,
