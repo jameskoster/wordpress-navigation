@@ -50,6 +50,7 @@ export default function FavoritesSection() {
     renameFolder,
     moveToFolder,
     removeFromFolder,
+    toggleStarred,
     getDynamicItem,
     reorderStarred,
     reorderFolders,
@@ -407,6 +408,17 @@ export default function FavoritesSection() {
                       ))}
                     </>
                   )}
+                  <div className={styles.contextMenuDivider} />
+                  <button
+                    className={styles.contextMenuItem}
+                    onClick={() => {
+                      toggleStarred(id);
+                      closeMenus();
+                    }}
+                  >
+                    <X size={12} />
+                    Remove from Favorites
+                  </button>
                 </div>
               )}
             </li>
@@ -716,6 +728,18 @@ export default function FavoritesSection() {
                                   ))}
                               </>
                             )}
+                            <div className={styles.contextMenuDivider} />
+                            <button
+                              className={styles.contextMenuItem}
+                              onClick={() => {
+                                removeFromFolder(item.id, folder.id);
+                                toggleStarred(item.id);
+                                closeMenus();
+                              }}
+                            >
+                              <X size={12} />
+                              Remove from Favorites
+                            </button>
                           </div>
                         )}
                       </li>
