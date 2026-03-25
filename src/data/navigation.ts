@@ -538,7 +538,7 @@ const deepPages: NavItem[] = [
   },
 ];
 
-export function getAllNavItems(): NavItem[] {
+function getSidebarNavItems(): NavItem[] {
   const all: NavItem[] = [];
   const collect = (items: NavItem[]) => {
     for (const item of items) {
@@ -550,8 +550,11 @@ export function getAllNavItems(): NavItem[] {
   collect(toolsNavItems);
   collect(settingsNavItems);
   collect(pluginNavItems);
-  all.push(...deepPages);
   return all;
+}
+
+export function getAllNavItems(): NavItem[] {
+  return [...getSidebarNavItems(), ...deepPages];
 }
 
 export function findNavItemByHref(href: string): NavItem | undefined {
@@ -608,7 +611,7 @@ function toLabel(slug: string): string {
 export function findBreadcrumbs(href: string): NavItem[] {
   const allItems = getAllNavItems();
 
-  if (allItems.some((item) => item.href === href)) {
+  if (getSidebarNavItems().some((item) => item.href === href)) {
     return [];
   }
 
