@@ -119,7 +119,7 @@ export default function NavItem({
   }
 
   if (hasChildren) {
-    const folderIndent = depth > 1 ? { paddingLeft: `${12 + (depth - 1) * 16}px` } : undefined;
+    const folderIndent = depth > 1 ? { paddingLeft: `${-12 + depth * 24}px` } : undefined;
     return (
       <li className={styles.navItemWrapper}>
         <button
@@ -144,7 +144,7 @@ export default function NavItem({
     );
   }
 
-  const indent = depth > 1 ? { paddingLeft: `${12 + (depth - 1) * 16}px` } : undefined;
+  const indent = depth > 1 ? { paddingLeft: `${-12 + depth * 24}px` } : undefined;
 
   return (
     <li className={styles.navItemWrapper}>

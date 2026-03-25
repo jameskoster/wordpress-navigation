@@ -615,7 +615,7 @@ export default function FavoritesSection() {
                           <Link
                             href={item.href}
                             className={`${styles.navItem} ${pathname === item.href && activeSource === "favorites" ? styles.navItemActive : ""}`}
-                            style={{ paddingLeft: "28px" }}
+                            style={{ paddingLeft: "36px" }}
                             onClick={() => setActiveSource("favorites")}
                             draggable={false}
                           >
