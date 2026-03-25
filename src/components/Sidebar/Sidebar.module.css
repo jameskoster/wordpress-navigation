@@ -10,18 +10,18 @@
   top: 0;
 }
 
-.sidebarHeader {
-  padding: 16px 16px 8px;
+.sidebarFooter {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding: 10px 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
 }
 
-.siteName {
-  font-size: var(--font-size-base);
-  font-weight: 600;
-  color: var(--sidebar-text-active);
-  letter-spacing: -0.01em;
+.sidebarVersion {
+  font-size: 11px;
+  color: var(--sidebar-text);
+  opacity: 0.5;
 }
 
 .customizeWrapper {
@@ -54,9 +54,9 @@
 
 .customizePopover {
   position: absolute;
-  top: 100%;
+  bottom: 100%;
   right: 0;
-  margin-top: 4px;
+  margin-bottom: 4px;
   width: 200px;
   background: #2c2c2e;
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -178,7 +178,7 @@
   align-items: center;
   justify-content: space-between;
   width: calc(100% - 16px);
-  margin: 0 8px 4px;
+  margin: 12px 8px 4px;
   padding: 6px 8px;
   border-radius: var(--radius-md);
   background: rgba(255, 255, 255, 0.04);

@@ -30,11 +30,6 @@ export default function Sidebar() {
 
   return (
     <aside className={styles.sidebar}>
-      <div className={styles.sidebarHeader}>
-        <div className={styles.siteName}>WordPress</div>
-        <CustomizePopover />
-      </div>
-
       <SearchTrigger />
 
       <nav className={styles.nav}>
@@ -74,6 +69,11 @@ export default function Sidebar() {
           </SidebarSection>
         </div>
       </nav>
+
+      <div className={styles.sidebarFooter}>
+        <span className={styles.sidebarVersion}>WordPress 6.8</span>
+        <CustomizePopover />
+      </div>
     </aside>
   );
 }
