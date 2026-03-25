@@ -337,7 +337,6 @@
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  padding: 0 12px 0 0;
 }
 
 .sectionToggle {
@@ -345,7 +344,7 @@
   align-items: center;
   gap: 4px;
   flex: 1;
-  padding: 6px 12px;
+  padding: 6px 16px 6px 12px;
   color: inherit;
   font-size: inherit;
   font-weight: inherit;
@@ -373,6 +372,7 @@
 .sectionAction {
   display: flex;
   align-items: center;
+  margin-right: 12px;
 }
 
 .sectionActionBtn {
@@ -487,7 +487,7 @@
   flex-shrink: 0;
   width: 6px;
   height: 6px;
-  margin-left: 6px;
+  margin-left: auto;
   background: var(--accent);
   border-radius: 50%;
 }
@@ -500,7 +500,7 @@
   min-width: 16px;
   height: 16px;
   padding: 0 4px;
-  margin-left: 4px;
+  margin-left: auto;
   font-size: 10px;
   font-weight: 600;
   line-height: 1;

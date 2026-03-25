@@ -104,11 +104,11 @@ export default function NavItem({
           className={`${styles.navFolder} ${childActive ? styles.navFolderActive : ""}`}
           onClick={handleToggle}
         >
+          <span className={styles.navItemLabel}>{item.label}</span>
           <ChevronRight
             size={10}
             className={`${styles.sectionChevron} ${isExpanded ? styles.sectionChevronOpen : ""}`}
           />
-          <span className={styles.navItemLabel}>{item.label}</span>
           {childBadgeTotal > 0 && (
             <span className={styles.badgeDot} />
           )}
@@ -130,14 +130,14 @@ export default function NavItem({
           <span className={styles.navItemContent}>
             {Icon && <Icon size={16} className={styles.navItemIcon} />}
             <span className={styles.navItemLabel}>{item.label}</span>
-            {childBadgeTotal > 0 && (
-              <span className={styles.badgeDot} />
-            )}
             <ChevronRight
               size={12}
               className={`${styles.subFolderChevron} ${isExpanded ? styles.navItemChevronOpen : ""}`}
             />
           </span>
+          {childBadgeTotal > 0 && (
+            <span className={styles.badgeDot} />
+          )}
         </button>
         {childrenList}
       </li>
@@ -157,10 +157,10 @@ export default function NavItem({
         <span className={styles.navItemContent}>
           {Icon && <Icon size={16} className={styles.navItemIcon} />}
           <span className={styles.navItemLabel}>{item.label}</span>
-          {badge != null && badge > 0 && (
-            <span className={styles.badgeInline}>{badge}</span>
-          )}
         </span>
+        {badge != null && badge > 0 && (
+          <span className={styles.badgeInline}>{badge}</span>
+        )}
       </Link>
     </li>
   );

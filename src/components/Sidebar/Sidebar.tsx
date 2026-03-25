@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { usePathname } from "next/navigation";
 import {
   coreNavItems,
   toolsNavItems,
@@ -30,8 +31,16 @@ function totalBadges(items: NavItemType[]): number {
 
 type PinnedSection = "tools" | "settings" | "plugins" | null;
 
+function getInitialPinned(pathname: string): PinnedSection {
+  if (pathname.startsWith("/plugins/")) return "plugins";
+  if (pathname.startsWith("/settings/")) return "settings";
+  if (pathname.startsWith("/tools/")) return "tools";
+  return null;
+}
+
 export default function Sidebar() {
-  const [expandedPinned, setExpandedPinned] = useState<PinnedSection>("plugins");
+  const pathname = usePathname();
+  const [expandedPinned, setExpandedPinned] = useState<PinnedSection>(() => getInitialPinned(pathname));
   const { isHidden } = useHiddenItems();
 
   const togglePinned = (section: PinnedSection) => {
@@ -56,6 +65,15 @@ export default function Sidebar() {
 
         <div className={styles.navPinned}>
           <SidebarSection
+            label="Plugins"
+            expanded={expandedPinned === "plugins"}
+            onToggle={() => togglePinned("plugins")}
+            badge={totalBadges(pluginNavItems)}
+          >
+            <AccordionNav items={pluginNavItems} depth={1} />
+          </SidebarSection>
+
+          <SidebarSection
             label="Tools"
             expanded={expandedPinned === "tools"}
             onToggle={() => togglePinned("tools")}
@@ -73,15 +91,6 @@ export default function Sidebar() {
             onToggle={() => togglePinned("settings")}
           >
             <AccordionNav items={settingsNavItems} depth={1} />
-          </SidebarSection>
-
-          <SidebarSection
-            label="Plugins"
-            expanded={expandedPinned === "plugins"}
-            onToggle={() => togglePinned("plugins")}
-            badge={totalBadges(pluginNavItems)}
-          >
-            <AccordionNav items={pluginNavItems} depth={1} />
           </SidebarSection>
         </div>
       </nav>

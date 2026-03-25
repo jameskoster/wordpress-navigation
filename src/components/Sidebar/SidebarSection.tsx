@@ -42,11 +42,11 @@ export default function SidebarSection({
           className={styles.sectionToggle}
           onClick={handleToggle}
         >
+          <span className={styles.sectionLabel}>{label}</span>
           <ChevronRight
             size={10}
             className={`${styles.sectionChevron} ${isExpanded ? styles.sectionChevronOpen : ""}`}
           />
-          <span className={styles.sectionLabel}>{label}</span>
           {badge != null && badge > 0 && (
             <span className={styles.badgeDot} />
           )}
