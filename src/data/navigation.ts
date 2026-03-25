@@ -248,6 +248,15 @@ export const pluginNavItems: NavItem[] = [
         starrable: true,
         children: [
           {
+            id: "plugin-woo-products-all",
+            label: "All Products",
+            icon: Package,
+            href: "/plugins/woocommerce/products",
+            section: "plugin",
+            pluginId: "woocommerce",
+            starrable: true,
+          },
+          {
             id: "plugin-woo-products-categories",
             label: "Categories",
             icon: FolderOpen,
