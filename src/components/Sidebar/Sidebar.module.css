@@ -235,7 +235,7 @@
   display: flex;
   align-items: center;
   gap: 4px;
-  margin: 12px 10px 6px;
+  margin: 12px 14px 6px;
 }
 
 .searchRow .searchTrigger {
@@ -372,18 +372,23 @@
 .sectionAction {
   display: flex;
   align-items: center;
-  margin-right: 12px;
+  margin-right: 20px;
 }
 
 .sectionActionBtn {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 18px;
-  height: 18px;
+  width: 20px;
+  height: 20px;
   border-radius: var(--radius-sm);
   color: var(--sidebar-section-label);
-  transition: color 0.15s, background 0.15s;
+  opacity: 0;
+  transition: opacity 0.15s, color 0.15s, background 0.15s;
+}
+
+.section:hover .sectionActionBtn {
+  opacity: 1;
 }
 
 .sectionActionBtn:hover {
@@ -485,9 +490,18 @@
 
 .badgeDot {
   flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: auto;
+}
+
+.badgeDot::after {
+  content: "";
   width: 6px;
   height: 6px;
-  margin-left: auto;
   background: var(--accent);
   border-radius: 50%;
 }
@@ -497,16 +511,16 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 16px;
-  height: 16px;
-  padding: 0 4px;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 5px;
   margin-left: auto;
   font-size: 10px;
   font-weight: 600;
   line-height: 1;
   color: #fff;
   background: var(--accent);
-  border-radius: 8px;
+  border-radius: 10px;
 }
 
 .navItemChevron {
@@ -528,7 +542,7 @@
   align-items: center;
   gap: 4px;
   width: 100%;
-  padding: 8px 12px;
+  padding: 8px 16px 8px 12px;
   cursor: pointer;
   transition: color 0.15s;
 }
@@ -563,7 +577,7 @@
 
 .favItemAction {
   position: absolute;
-  right: 4px;
+  right: 16px;
   top: 50%;
   transform: translateY(-50%);
   display: flex;
@@ -577,8 +591,6 @@
   opacity: 0;
   transition: opacity 0.15s, color 0.15s;
   flex-shrink: 0;
-  margin-right: 4px;
-  border-radius: var(--radius-sm);
 }
 
 .favItemRow:hover .favItemAction,

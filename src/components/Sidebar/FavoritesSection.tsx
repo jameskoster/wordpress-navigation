@@ -320,7 +320,7 @@ export default function FavoritesSection() {
             findAncestorLabel(id);
           const isFirst = index === 0;
           const isLast = index === rootStarred.length - 1;
-          const hasMenuContent = rootStarred.length > 1 || folders.length > 0;
+          const hasMenuContent = true;
           return (
             <li
               key={id}
