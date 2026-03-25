@@ -5,6 +5,7 @@ import { useRouter, usePathname } from "next/navigation";
 import { Clock } from "lucide-react";
 import { useNavigationHistory } from "@/hooks/useNavigationHistory";
 import { getAllNavItems } from "@/data/navigation";
+import Tooltip from "@/components/Tooltip/Tooltip";
 import styles from "./Sidebar.module.css";
 
 export default function HistoryButton() {
@@ -42,14 +43,16 @@ export default function HistoryButton() {
 
   return (
     <div className={styles.historyWrapper} ref={wrapperRef}>
-      <button
-        ref={buttonRef}
-        className={styles.historyButton}
-        onClick={handleOpen}
-        title="Navigation history"
-      >
-        <Clock size={14} />
-      </button>
+      <Tooltip label="Navigation history">
+        <button
+          ref={buttonRef}
+          className={styles.historyButton}
+          onClick={handleOpen}
+          aria-label="Navigation history"
+        >
+          <Clock size={14} />
+        </button>
+      </Tooltip>
       {isOpen && (
         <div
           className={styles.historyDropdown}

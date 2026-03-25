@@ -11,6 +11,7 @@ import {
 } from "@/data/navigation";
 import { useFavorites } from "@/hooks/useFavorites";
 import type { DynamicNavItem } from "@/types/navigation";
+import Tooltip from "@/components/Tooltip/Tooltip";
 import styles from "./PageHeader.module.css";
 
 function titleFromPath(pathname: string): string {
@@ -92,13 +93,15 @@ export default function PageHeader() {
       <div className={styles.titleRow}>
         <h1 className={styles.title}>{title}</h1>
         {showStar && starId && (
-          <button
-            className={`${styles.starButton} ${starred ? styles.starButtonActive : ""}`}
-            onClick={handleToggleStar}
-            title={starred ? "Remove from Favorites" : "Add to Favorites"}
-          >
-            <Star size={18} fill={starred ? "currentColor" : "none"} />
-          </button>
+          <Tooltip label={starred ? "Remove from Favorites" : "Add to Favorites"}>
+            <button
+              className={`${styles.starButton} ${starred ? styles.starButtonActive : ""}`}
+              onClick={handleToggleStar}
+              aria-label={starred ? "Remove from Favorites" : "Add to Favorites"}
+            >
+              <Star size={18} fill={starred ? "currentColor" : "none"} />
+            </button>
+          </Tooltip>
         )}
       </div>
     </header>

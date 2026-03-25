@@ -54,6 +54,20 @@ export default function NavItem({
   const [localExpanded, setLocalExpanded] = useState(childActive);
   const isExpanded = isControlled ? expanded : localExpanded;
 
+  const [expandedChildId, setExpandedChildId] = useState<string | null>(() => {
+    if (!hasChildren) return null;
+    for (const child of item.children!) {
+      if (child.children && isDescendantActive(child, pathname)) {
+        return child.id;
+      }
+    }
+    return null;
+  });
+
+  const handleChildToggle = (id: string) => {
+    setExpandedChildId((prev) => (prev === id ? null : id));
+  };
+
   const Icon = item.icon;
 
   const handleToggle = () => {
@@ -68,7 +82,13 @@ export default function NavItem({
     <div className={`${styles.sectionContent} ${isExpanded ? styles.sectionContentOpen : ""}`}>
       <ul className={styles.navItemChildren}>
         {item.children!.map((child) => (
-          <NavItem key={child.id} item={child} depth={depth + 1} />
+          <NavItem
+            key={child.id}
+            item={child}
+            depth={depth + 1}
+            expanded={child.children ? expandedChildId === child.id : undefined}
+            onToggleExpand={child.children ? handleChildToggle : undefined}
+          />
         ))}
       </ul>
     </div>

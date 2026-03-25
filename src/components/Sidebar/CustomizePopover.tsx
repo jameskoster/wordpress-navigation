@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import { SlidersHorizontal } from "lucide-react";
 import { coreNavItems } from "@/data/navigation";
 import { useHiddenItems } from "@/hooks/useHiddenItems";
+import Tooltip from "@/components/Tooltip/Tooltip";
 import styles from "./Sidebar.module.css";
 
 const hideableItems = coreNavItems.filter((item) => item.hideable);
@@ -29,13 +30,15 @@ export default function CustomizePopover() {
 
   return (
     <div className={styles.customizeWrapper} ref={popoverRef}>
-      <button
-        className={styles.customizeButton}
-        onClick={() => setIsOpen(!isOpen)}
-        title="Customize sidebar"
-      >
-        <SlidersHorizontal size={14} />
-      </button>
+      <Tooltip label="Customize sidebar">
+        <button
+          className={styles.customizeButton}
+          onClick={() => setIsOpen(!isOpen)}
+          aria-label="Customize sidebar"
+        >
+          <SlidersHorizontal size={14} />
+        </button>
+      </Tooltip>
       {isOpen && (
         <div className={styles.customizePopover}>
           <div className={styles.customizeHeader}>Customize sidebar</div>

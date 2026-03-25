@@ -20,6 +20,7 @@ import { useActiveSource } from "@/hooks/useActiveSource";
 import { getAllNavItems, findAncestorLabel } from "@/data/navigation";
 import type { NavItem } from "@/types/navigation";
 import SidebarSection from "./SidebarSection";
+import Tooltip from "@/components/Tooltip/Tooltip";
 import styles from "./Sidebar.module.css";
 
 interface MenuPosition {
@@ -292,13 +293,15 @@ export default function FavoritesSection() {
   };
 
   const addAction = (
-    <button
-      className={styles.sectionActionBtn}
-      onClick={() => setIsCreatingFolder(true)}
-      title="Create folder"
-    >
-      <FolderPlus size={12} />
-    </button>
+    <Tooltip label="Create folder">
+      <button
+        className={styles.sectionActionBtn}
+        onClick={() => setIsCreatingFolder(true)}
+        aria-label="Create folder"
+      >
+        <FolderPlus size={12} />
+      </button>
+    </Tooltip>
   );
 
   if (favorites.starred.length === 0) return null;
@@ -349,12 +352,15 @@ export default function FavoritesSection() {
                   </span>
                 </Link>
                 {hasMenuContent && (
-                  <button
-                    className={styles.favItemAction}
-                    onClick={(e) => openMenu(e, id, "item")}
-                  >
-                    <MoreHorizontal size={12} />
-                  </button>
+                  <Tooltip label="More options">
+                    <button
+                      className={styles.favItemAction}
+                      onClick={(e) => openMenu(e, id, "item")}
+                      aria-label="More options"
+                    >
+                      <MoreHorizontal size={12} />
+                    </button>
+                  </Tooltip>
                 )}
               </div>
               {contextMenuId === id && (
@@ -478,12 +484,15 @@ export default function FavoritesSection() {
                       />
                     </span>
                   </button>
-                  <button
-                    className={styles.favItemAction}
-                    onClick={(e) => openMenu(e, folder.id, "folder")}
-                  >
-                    <MoreHorizontal size={12} />
-                  </button>
+                  <Tooltip label="More options">
+                    <button
+                      className={styles.favItemAction}
+                      onClick={(e) => openMenu(e, folder.id, "folder")}
+                      aria-label="More options"
+                    >
+                      <MoreHorizontal size={12} />
+                    </button>
+                  </Tooltip>
                 </div>
               )}
               {folderMenuId === folder.id && (
@@ -615,14 +624,17 @@ export default function FavoritesSection() {
                               </span>
                             </span>
                           </Link>
-                          <button
-                            className={styles.favItemAction}
-                            onClick={(e) =>
-                              openMenu(e, item.id, "folderItem")
-                            }
-                          >
-                            <MoreHorizontal size={12} />
-                          </button>
+                          <Tooltip label="More options">
+                            <button
+                              className={styles.favItemAction}
+                              onClick={(e) =>
+                                openMenu(e, item.id, "folderItem")
+                              }
+                              aria-label="More options"
+                            >
+                              <MoreHorizontal size={12} />
+                            </button>
+                          </Tooltip>
                         </div>
                         {folderItemMenuId === item.id && (
                           <div
