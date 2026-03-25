@@ -90,7 +90,7 @@ export default function NavItem({
           />
           <span className={styles.navItemLabel}>{item.label}</span>
           {childBadgeTotal > 0 && (
-            <span className={styles.badge}>{childBadgeTotal}</span>
+            <span className={styles.badgeDot} />
           )}
         </button>
         {childrenList}
@@ -110,13 +110,13 @@ export default function NavItem({
           <span className={styles.navItemContent}>
             {Icon && <Icon size={16} className={styles.navItemIcon} />}
             <span className={styles.navItemLabel}>{item.label}</span>
+            {childBadgeTotal > 0 && (
+              <span className={styles.badgeDot} />
+            )}
             <ChevronRight
               size={12}
               className={`${styles.subFolderChevron} ${isExpanded ? styles.navItemChevronOpen : ""}`}
             />
-            {childBadgeTotal > 0 && (
-              <span className={styles.badge}>{childBadgeTotal}</span>
-            )}
           </span>
         </button>
         {childrenList}
@@ -138,7 +138,7 @@ export default function NavItem({
           {Icon && <Icon size={16} className={styles.navItemIcon} />}
           <span className={styles.navItemLabel}>{item.label}</span>
           {badge != null && badge > 0 && (
-            <span className={styles.badge}>{badge}</span>
+            <span className={styles.badgeInline}>{badge}</span>
           )}
         </span>
       </Link>

@@ -12,13 +12,15 @@ export default function HistoryButton() {
   const { history } = useNavigationHistory();
   const router = useRouter();
   const pathname = usePathname();
-  const menuRef = useRef<HTMLDivElement>(null);
+  const wrapperRef = useRef<HTMLDivElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
+  const [dropdownPos, setDropdownPos] = useState({ top: 0, left: 0 });
   const allNav = getAllNavItems();
 
   useEffect(() => {
     if (!isOpen) return;
     const handleClick = (e: MouseEvent) => {
-      if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
+      if (wrapperRef.current && !wrapperRef.current.contains(e.target as Node)) {
         setIsOpen(false);
       }
     };
@@ -26,21 +28,33 @@ export default function HistoryButton() {
     return () => window.removeEventListener("mousedown", handleClick);
   }, [isOpen]);
 
+  const handleOpen = () => {
+    if (buttonRef.current) {
+      const rect = buttonRef.current.getBoundingClientRect();
+      setDropdownPos({ top: rect.bottom + 4, left: rect.left });
+    }
+    setIsOpen(!isOpen);
+  };
+
   const displayHistory = history.filter((entry) => entry.href !== pathname);
 
   if (displayHistory.length === 0) return null;
 
   return (
-    <div className={styles.historyWrapper} ref={menuRef}>
+    <div className={styles.historyWrapper} ref={wrapperRef}>
       <button
+        ref={buttonRef}
         className={styles.historyButton}
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={handleOpen}
         title="Navigation history"
       >
         <Clock size={14} />
       </button>
       {isOpen && (
-        <div className={styles.historyDropdown}>
+        <div
+          className={styles.historyDropdown}
+          style={{ top: dropdownPos.top, left: dropdownPos.left }}
+        >
           <div className={styles.historyHeader}>Recent</div>
           <ul className={styles.historyList}>
             {displayHistory.map((entry) => {

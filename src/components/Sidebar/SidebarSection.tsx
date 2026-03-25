@@ -48,7 +48,7 @@ export default function SidebarSection({
           />
           <span className={styles.sectionLabel}>{label}</span>
           {badge != null && badge > 0 && (
-            <span className={styles.badge}>{badge}</span>
+            <span className={styles.badgeDot} />
           )}
         </button>
         {action && (

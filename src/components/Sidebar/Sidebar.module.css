@@ -267,9 +267,7 @@
 }
 
 .historyDropdown {
-  position: absolute;
-  top: calc(100% + 4px);
-  left: 0;
+  position: fixed;
   width: 220px;
   background: #2c2c2e;
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -485,7 +483,16 @@
   text-overflow: ellipsis;
 }
 
-.badge {
+.badgeDot {
+  flex-shrink: 0;
+  width: 6px;
+  height: 6px;
+  margin-left: 6px;
+  background: var(--accent);
+  border-radius: 50%;
+}
+
+.badgeInline {
   flex-shrink: 0;
   display: inline-flex;
   align-items: center;
@@ -493,7 +500,7 @@
   min-width: 16px;
   height: 16px;
   padding: 0 4px;
-  margin-left: auto;
+  margin-left: 4px;
   font-size: 10px;
   font-weight: 600;
   line-height: 1;
