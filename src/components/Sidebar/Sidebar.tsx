@@ -58,7 +58,7 @@ export default function Sidebar() {
 
       <nav className={styles.nav}>
         <div className={styles.navScrollable}>
-          <AccordionNav items={visibleCoreItems} />
+          <AccordionNav items={visibleCoreItems} defaultExpandedId="posts" />
 
           <FavoritesSection />
         </div>

@@ -9,6 +9,7 @@ import styles from "./Sidebar.module.css";
 interface AccordionNavProps {
   items: NavItemType[];
   depth?: number;
+  defaultExpandedId?: string;
 }
 
 function findActiveParentId(
@@ -24,10 +25,10 @@ function findActiveParentId(
   return null;
 }
 
-export default function AccordionNav({ items, depth = 0 }: AccordionNavProps) {
+export default function AccordionNav({ items, depth = 0, defaultExpandedId }: AccordionNavProps) {
   const pathname = usePathname();
   const [expandedId, setExpandedId] = useState<string | null>(
-    findActiveParentId(items, pathname)
+    findActiveParentId(items, pathname) ?? defaultExpandedId ?? null
   );
 
   const handleToggle = (id: string) => {
