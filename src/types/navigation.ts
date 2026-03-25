@@ -10,6 +10,7 @@ export type NavItem = {
   children?: NavItem[];
   starrable?: boolean;
   hideable?: boolean;
+  badge?: number;
 };
 
 export type FavoritesFolder = {

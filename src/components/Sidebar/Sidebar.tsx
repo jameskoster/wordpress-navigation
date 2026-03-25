@@ -13,8 +13,20 @@ import SidebarSection from "./SidebarSection";
 import FavoritesSection from "./FavoritesSection";
 import AccordionNav from "./AccordionNav";
 import SearchTrigger from "./SearchTrigger";
+import HistoryButton from "./HistoryButton";
 import CustomizePopover from "./CustomizePopover";
 import styles from "./Sidebar.module.css";
+
+import type { NavItem as NavItemType } from "@/types/navigation";
+
+function totalBadges(items: NavItemType[]): number {
+  let total = 0;
+  for (const item of items) {
+    total += item.badge ?? 0;
+    if (item.children) total += totalBadges(item.children);
+  }
+  return total;
+}
 
 type PinnedSection = "tools" | "settings" | "plugins" | null;
 
@@ -30,7 +42,10 @@ export default function Sidebar() {
 
   return (
     <aside className={styles.sidebar}>
-      <SearchTrigger />
+      <div className={styles.searchRow}>
+        <SearchTrigger />
+        <HistoryButton />
+      </div>
 
       <nav className={styles.nav}>
         <div className={styles.navScrollable}>
@@ -64,6 +79,7 @@ export default function Sidebar() {
             label="Plugins"
             expanded={expandedPinned === "plugins"}
             onToggle={() => togglePinned("plugins")}
+            badge={totalBadges(pluginNavItems)}
           >
             <AccordionNav items={pluginNavItems} depth={1} />
           </SidebarSection>

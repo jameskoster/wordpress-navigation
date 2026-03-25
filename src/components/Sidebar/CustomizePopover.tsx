@@ -10,7 +10,7 @@ const hideableItems = coreNavItems.filter((item) => item.hideable);
 
 export default function CustomizePopover() {
   const [isOpen, setIsOpen] = useState(false);
-  const { isHidden, toggleHidden } = useHiddenItems();
+  const { hiddenIds, isHidden, toggleHidden, resetHidden } = useHiddenItems();
   const popoverRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -63,6 +63,16 @@ export default function CustomizePopover() {
               );
             })}
           </ul>
+          {hiddenIds.length > 0 && (
+            <div className={styles.customizeFooter}>
+              <button
+                className={styles.customizeReset}
+                onClick={() => resetHidden()}
+              >
+                Reset to defaults
+              </button>
+            </div>
+          )}
         </div>
       )}
     </div>

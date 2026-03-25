@@ -71,8 +71,6 @@
   font-size: 11px;
   font-weight: 600;
   color: var(--sidebar-text);
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
 }
 
 .customizeList {
@@ -138,6 +136,25 @@
   transform: rotate(45deg);
 }
 
+.customizeFooter {
+  padding: 4px 8px 8px;
+}
+
+.customizeReset {
+  width: 100%;
+  padding: 5px 8px;
+  font-size: 12px;
+  color: var(--sidebar-section-label);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.customizeReset:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--sidebar-text-hover);
+}
+
 .nav {
   flex: 1;
   display: flex;
@@ -177,8 +194,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: calc(100% - 16px);
-  margin: 8px 8px 4px;
+  width: 100%;
+  margin: 0;
   padding: 6px 8px;
   border-radius: var(--radius-md);
   background: rgba(255, 255, 255, 0.04);
@@ -212,10 +229,109 @@
   line-height: 1.4;
 }
 
+/* Search and history row */
+
+.searchRow {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin: 8px 8px 4px;
+}
+
+.searchRow .searchTrigger {
+  margin: 0;
+}
+
+.historyWrapper {
+  position: relative;
+}
+
+.historyButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-md);
+  color: var(--sidebar-section-label);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background 0.15s, color 0.15s;
+}
+
+.historyButton:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--sidebar-text-hover);
+}
+
+.historyDropdown {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  width: 220px;
+  background: #2c2c2e;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  z-index: 100;
+  overflow: hidden;
+}
+
+.historyHeader {
+  padding: 8px 12px 4px;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--sidebar-section-label);
+}
+
+.historyList {
+  list-style: none;
+  padding: 0 4px 4px;
+  margin: 0;
+}
+
+.historyItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 6px 8px;
+  color: var(--sidebar-text);
+  font-size: var(--font-size-sm);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: background 0.1s, color 0.1s;
+}
+
+.historyItem:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--sidebar-text-hover);
+}
+
+.historyItemIcon {
+  flex-shrink: 0;
+  opacity: 0.6;
+}
+
+.historyItemLabel {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 /* Section (collapsible group header like "Plugins", "Settings", "Favorites") */
 
 .section {
   margin-top: 8px;
+}
+
+.sectionHeader,
+.navFolder {
+  color: var(--sidebar-section-label);
+  font-size: var(--font-size-xs);
+  font-weight: 500;
 }
 
 .sectionHeader {
@@ -224,11 +340,6 @@
   justify-content: space-between;
   width: 100%;
   padding: 0 12px 0 0;
-  color: var(--sidebar-section-label);
-  font-size: var(--font-size-xs);
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
 }
 
 .sectionToggle {
@@ -240,8 +351,6 @@
   color: inherit;
   font-size: inherit;
   font-weight: inherit;
-  text-transform: inherit;
-  letter-spacing: inherit;
   cursor: pointer;
   transition: color 0.15s;
 }
@@ -376,6 +485,23 @@
   text-overflow: ellipsis;
 }
 
+.badge {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 16px;
+  height: 16px;
+  padding: 0 4px;
+  margin-left: auto;
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 1;
+  color: #fff;
+  background: var(--accent);
+  border-radius: 8px;
+}
+
 .navItemChevron {
   flex-shrink: 0;
   opacity: 0.5;
@@ -386,17 +512,16 @@
   transform: rotate(90deg);
 }
 
+.navItemWrapper:not(:first-child) > .navFolder {
+  margin-top: 8px;
+}
+
 .navFolder {
   display: flex;
   align-items: center;
   gap: 4px;
   width: 100%;
   padding: 6px 12px;
-  color: var(--sidebar-section-label);
-  font-size: var(--font-size-xs);
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
   cursor: pointer;
   transition: color 0.15s;
 }

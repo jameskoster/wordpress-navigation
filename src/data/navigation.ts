@@ -63,6 +63,7 @@ export const coreNavItems: NavItem[] = [
     icon: File,
     href: "/pages",
     section: "core",
+    hideable: true,
   },
   {
     id: "media",
@@ -70,6 +71,7 @@ export const coreNavItems: NavItem[] = [
     icon: Image,
     href: "/media",
     section: "core",
+    hideable: true,
   },
   {
     id: "comments",
@@ -260,6 +262,7 @@ export const pluginNavItems: NavItem[] = [
         section: "plugin",
         pluginId: "woocommerce",
         starrable: true,
+        badge: 3,
       },
       {
         id: "plugin-woo-products",
@@ -432,6 +435,7 @@ export const pluginNavItems: NavItem[] = [
         section: "plugin",
         pluginId: "yoast",
         starrable: true,
+        badge: 1,
       },
       {
         id: "plugin-yoast-search",

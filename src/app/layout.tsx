@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { FavoritesProvider } from "@/hooks/useFavorites";
 import { ActiveSourceProvider } from "@/hooks/useActiveSource";
 import { HiddenItemsProvider } from "@/hooks/useHiddenItems";
+import { NavigationHistoryProvider } from "@/hooks/useNavigationHistory";
 import Sidebar from "@/components/Sidebar/Sidebar";
 import CommandPalette from "@/components/CommandPalette/CommandPalette";
 import "./globals.css";
@@ -21,6 +22,7 @@ export default function RootLayout({
       <body>
         <ActiveSourceProvider>
         <HiddenItemsProvider>
+        <NavigationHistoryProvider>
         <FavoritesProvider>
           <div
             style={{
@@ -40,6 +42,7 @@ export default function RootLayout({
             </main>
           </div>
         </FavoritesProvider>
+        </NavigationHistoryProvider>
         </HiddenItemsProvider>
         </ActiveSourceProvider>
       </body>

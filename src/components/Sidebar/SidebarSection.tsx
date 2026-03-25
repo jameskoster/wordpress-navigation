@@ -11,6 +11,7 @@ interface SidebarSectionProps {
   action?: ReactNode;
   expanded?: boolean;
   onToggle?: () => void;
+  badge?: number;
 }
 
 export default function SidebarSection({
@@ -20,6 +21,7 @@ export default function SidebarSection({
   action,
   expanded,
   onToggle,
+  badge,
 }: SidebarSectionProps) {
   const [localExpanded, setLocalExpanded] = useState(defaultExpanded);
   const isControlled = expanded !== undefined;
@@ -45,6 +47,9 @@ export default function SidebarSection({
             className={`${styles.sectionChevron} ${isExpanded ? styles.sectionChevronOpen : ""}`}
           />
           <span className={styles.sectionLabel}>{label}</span>
+          {badge != null && badge > 0 && (
+            <span className={styles.badge}>{badge}</span>
+          )}
         </button>
         {action && (
           <span className={styles.sectionAction}>{action}</span>

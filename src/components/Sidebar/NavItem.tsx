@@ -19,6 +19,16 @@ function isPathMatch(href: string, pathname: string): boolean {
   return pathname === href || pathname.startsWith(href + "/");
 }
 
+function collectBadges(item: NavItemType): number {
+  let total = item.badge ?? 0;
+  if (item.children) {
+    for (const child of item.children) {
+      total += collectBadges(child);
+    }
+  }
+  return total;
+}
+
 function isDescendantActive(item: NavItemType, pathname: string): boolean {
   if (!item.children) return false;
   return item.children.some(
@@ -64,6 +74,9 @@ export default function NavItem({
     </div>
   );
 
+  const badge = item.badge;
+  const childBadgeTotal = hasChildren ? collectBadges(item) : 0;
+
   if (hasChildren && depth === 0) {
     return (
       <li className={styles.navItemWrapper}>
@@ -76,6 +89,9 @@ export default function NavItem({
             className={`${styles.sectionChevron} ${isExpanded ? styles.sectionChevronOpen : ""}`}
           />
           <span className={styles.navItemLabel}>{item.label}</span>
+          {childBadgeTotal > 0 && (
+            <span className={styles.badge}>{childBadgeTotal}</span>
+          )}
         </button>
         {childrenList}
       </li>
@@ -98,6 +114,9 @@ export default function NavItem({
               size={12}
               className={`${styles.subFolderChevron} ${isExpanded ? styles.navItemChevronOpen : ""}`}
             />
+            {childBadgeTotal > 0 && (
+              <span className={styles.badge}>{childBadgeTotal}</span>
+            )}
           </span>
         </button>
         {childrenList}
@@ -118,6 +137,9 @@ export default function NavItem({
         <span className={styles.navItemContent}>
           {Icon && <Icon size={16} className={styles.navItemIcon} />}
           <span className={styles.navItemLabel}>{item.label}</span>
+          {badge != null && badge > 0 && (
+            <span className={styles.badge}>{badge}</span>
+          )}
         </span>
       </Link>
     </li>

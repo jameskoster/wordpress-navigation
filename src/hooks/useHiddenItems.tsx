@@ -15,12 +15,14 @@ interface HiddenItemsContextValue {
   hiddenIds: string[];
   isHidden: (id: string) => boolean;
   toggleHidden: (id: string) => void;
+  resetHidden: () => void;
 }
 
 const HiddenItemsContext = createContext<HiddenItemsContextValue>({
   hiddenIds: [],
   isHidden: () => false,
   toggleHidden: () => {},
+  resetHidden: () => {},
 });
 
 export function HiddenItemsProvider({ children }: { children: ReactNode }) {
@@ -52,8 +54,14 @@ export function HiddenItemsProvider({ children }: { children: ReactNode }) {
     );
   }, []);
 
+  const resetHidden = useCallback(() => {
+    setHiddenIds([]);
+  }, []);
+
   return (
-    <HiddenItemsContext.Provider value={{ hiddenIds, isHidden, toggleHidden }}>
+    <HiddenItemsContext.Provider
+      value={{ hiddenIds, isHidden, toggleHidden, resetHidden }}
+    >
       {children}
     </HiddenItemsContext.Provider>
   );
