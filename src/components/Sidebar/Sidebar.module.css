@@ -178,7 +178,7 @@
   align-items: center;
   justify-content: space-between;
   width: calc(100% - 16px);
-  margin: 12px 8px 4px;
+  margin: 8px 8px 4px;
   padding: 6px 8px;
   border-radius: var(--radius-md);
   background: rgba(255, 255, 255, 0.04);
@@ -215,9 +215,7 @@
 /* Section (collapsible group header like "Plugins", "Settings", "Favorites") */
 
 .section {
-  margin-top: 4px;
-  border-top: 1px solid var(--sidebar-border);
-  padding-top: 4px;
+  margin-top: 8px;
 }
 
 .sectionHeader {

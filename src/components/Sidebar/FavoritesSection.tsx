@@ -57,6 +57,16 @@ export default function FavoritesSection() {
   const pathname = usePathname();
   const { activeSource, setActiveSource } = useActiveSource();
   const allNav = getAllNavItems();
+  const [sectionExpanded, setSectionExpanded] = useState(true);
+  const prevStarredCount = useRef(favorites.starred.length);
+
+  useEffect(() => {
+    if (favorites.starred.length > prevStarredCount.current) {
+      setSectionExpanded(true);
+    }
+    prevStarredCount.current = favorites.starred.length;
+  }, [favorites.starred.length]);
+
   const [isCreatingFolder, setIsCreatingFolder] = useState(false);
   const [newFolderName, setNewFolderName] = useState("");
   const [editingFolderId, setEditingFolderId] = useState<string | null>(null);
@@ -291,8 +301,10 @@ export default function FavoritesSection() {
     </button>
   );
 
+  if (favorites.starred.length === 0) return null;
+
   return (
-    <SidebarSection label="Favorites" defaultExpanded action={addAction}>
+    <SidebarSection label="Favorites" expanded={sectionExpanded} onToggle={() => setSectionExpanded(!sectionExpanded)} action={addAction}>
       <ul className={styles.navList}>
         {/* Root starred items */}
         {rootStarred.map((id, index) => {
@@ -731,15 +743,6 @@ export default function FavoritesSection() {
           </li>
         )}
 
-        {rootStarred.length === 0 &&
-          folders.length === 0 &&
-          !isCreatingFolder && (
-            <li>
-              <div className={styles.emptyHint}>
-                Star plugin pages to add them here
-              </div>
-            </li>
-          )}
       </ul>
     </SidebarSection>
   );
