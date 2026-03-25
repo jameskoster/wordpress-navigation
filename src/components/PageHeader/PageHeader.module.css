@@ -1,0 +1,69 @@
+.header {
+  padding: 24px 32px 0;
+}
+
+.breadcrumbs {
+  display: flex;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.breadcrumbItem {
+  display: flex;
+  align-items: center;
+}
+
+.breadcrumbSep {
+  color: var(--text-tertiary);
+  margin: 0 4px;
+}
+
+.breadcrumbLink {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+
+.breadcrumbLink:hover {
+  color: var(--text-primary);
+}
+
+.breadcrumbCurrent {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+}
+
+.titleRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.title {
+  font-size: var(--font-size-2xl);
+  font-weight: 600;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.starButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-md);
+  color: var(--text-tertiary);
+  transition: color 0.15s, background 0.15s;
+}
+
+.starButton:hover {
+  color: var(--star-color);
+  background: rgba(0, 0, 0, 0.04);
+}
+
+.starButtonActive {
+  color: var(--star-color);
+}
