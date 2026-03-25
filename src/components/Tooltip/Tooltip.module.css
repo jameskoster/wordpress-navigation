@@ -16,7 +16,7 @@
   background: #1a1a1a;
   color: #fff;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.24);
-  animation: fadeIn 120ms ease-out;
+  animation: fadeIn 80ms ease-out;
 }
 
 .top {
