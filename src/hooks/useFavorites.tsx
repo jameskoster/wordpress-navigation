@@ -25,6 +25,9 @@ interface FavoritesContextValue {
   toggleStarred: (id: string, dynamicMeta?: DynamicNavItem) => void;
   removeStarred: (id: string) => void;
   getDynamicItem: (id: string) => DynamicNavItem | undefined;
+  reorderStarred: (fromIndex: number, toIndex: number) => void;
+  reorderFolders: (fromIndex: number, toIndex: number) => void;
+  reorderFolderItems: (folderId: string, fromIndex: number, toIndex: number) => void;
   createFolder: (label: string) => void;
   deleteFolder: (folderId: string) => void;
   renameFolder: (folderId: string, label: string) => void;
@@ -145,6 +148,48 @@ export function FavoritesProvider({ children }: { children: ReactNode }) {
     }));
   }, []);
 
+  const reorderStarred = useCallback((fromIndex: number, toIndex: number) => {
+    setFavorites((prev) => {
+      const folderItemIds = new Set(prev.folders.flatMap((f) => f.items));
+      const rootIds = prev.starred.filter((id) => !folderItemIds.has(id));
+      const item = rootIds[fromIndex];
+      if (!item || fromIndex === toIndex) return prev;
+      rootIds.splice(fromIndex, 1);
+      rootIds.splice(toIndex, 0, item);
+      const folderIds = prev.starred.filter((id) => folderItemIds.has(id));
+      return { ...prev, starred: [...rootIds, ...folderIds] };
+    });
+  }, []);
+
+  const reorderFolders = useCallback((fromIndex: number, toIndex: number) => {
+    setFavorites((prev) => {
+      if (fromIndex === toIndex) return prev;
+      const next = [...prev.folders];
+      const [item] = next.splice(fromIndex, 1);
+      next.splice(toIndex, 0, item);
+      return { ...prev, folders: next };
+    });
+  }, []);
+
+  const reorderFolderItems = useCallback(
+    (folderId: string, fromIndex: number, toIndex: number) => {
+      setFavorites((prev) => {
+        if (fromIndex === toIndex) return prev;
+        return {
+          ...prev,
+          folders: prev.folders.map((f) => {
+            if (f.id !== folderId) return f;
+            const next = [...f.items];
+            const [item] = next.splice(fromIndex, 1);
+            next.splice(toIndex, 0, item);
+            return { ...f, items: next };
+          }),
+        };
+      });
+    },
+    []
+  );
+
   const getDynamicItem = useCallback(
     (id: string) => favorites.dynamicItems?.[id],
     [favorites.dynamicItems]
@@ -162,6 +207,9 @@ export function FavoritesProvider({ children }: { children: ReactNode }) {
         toggleStarred,
         removeStarred,
         getDynamicItem,
+        reorderStarred,
+        reorderFolders,
+        reorderFolderItems,
         createFolder,
         deleteFolder,
         renameFolder,

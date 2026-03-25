@@ -94,11 +94,11 @@ export default function NavItem({
           <span className={styles.navItemContent}>
             {Icon && <Icon size={16} className={styles.navItemIcon} />}
             <span className={styles.navItemLabel}>{item.label}</span>
+            <ChevronRight
+              size={12}
+              className={`${styles.subFolderChevron} ${isExpanded ? styles.navItemChevronOpen : ""}`}
+            />
           </span>
-          <ChevronRight
-            size={12}
-            className={`${styles.navItemChevron} ${isExpanded ? styles.navItemChevronOpen : ""}`}
-          />
         </button>
         {childrenList}
       </li>
