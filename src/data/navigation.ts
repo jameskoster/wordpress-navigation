@@ -354,35 +354,6 @@ export const pluginNavItems: NavItem[] = [
             section: "plugin",
             pluginId: "woocommerce",
             starrable: true,
-            children: [
-              {
-                id: "plugin-woo-shipping-zone-us",
-                label: "United States",
-                icon: Globe,
-                href: "/plugins/woocommerce/shipping/zones-and-rates/united-states",
-                section: "plugin",
-                pluginId: "woocommerce",
-                starrable: true,
-              },
-              {
-                id: "plugin-woo-shipping-zone-eu",
-                label: "Europe",
-                icon: Globe,
-                href: "/plugins/woocommerce/shipping/zones-and-rates/europe",
-                section: "plugin",
-                pluginId: "woocommerce",
-                starrable: true,
-              },
-              {
-                id: "plugin-woo-shipping-zone-row",
-                label: "Rest of World",
-                icon: Globe,
-                href: "/plugins/woocommerce/shipping/zones-and-rates/rest-of-world",
-                section: "plugin",
-                pluginId: "woocommerce",
-                starrable: true,
-              },
-            ],
           },
           {
             id: "plugin-woo-shipping-classes",
@@ -533,6 +504,36 @@ export const pluginNavItems: NavItem[] = [
   },
 ];
 
+const deepPages: NavItem[] = [
+  {
+    id: "plugin-woo-shipping-zone-us",
+    label: "United States",
+    icon: Globe,
+    href: "/plugins/woocommerce/shipping/zones-and-rates/united-states",
+    section: "plugin",
+    pluginId: "woocommerce",
+    starrable: true,
+  },
+  {
+    id: "plugin-woo-shipping-zone-eu",
+    label: "Europe",
+    icon: Globe,
+    href: "/plugins/woocommerce/shipping/zones-and-rates/europe",
+    section: "plugin",
+    pluginId: "woocommerce",
+    starrable: true,
+  },
+  {
+    id: "plugin-woo-shipping-zone-row",
+    label: "Rest of World",
+    icon: Globe,
+    href: "/plugins/woocommerce/shipping/zones-and-rates/rest-of-world",
+    section: "plugin",
+    pluginId: "woocommerce",
+    starrable: true,
+  },
+];
+
 export function getAllNavItems(): NavItem[] {
   const all: NavItem[] = [];
   const collect = (items: NavItem[]) => {
@@ -545,6 +546,7 @@ export function getAllNavItems(): NavItem[] {
   collect(toolsNavItems);
   collect(settingsNavItems);
   collect(pluginNavItems);
+  all.push(...deepPages);
   return all;
 }
 
@@ -567,12 +569,25 @@ export function findAncestorLabel(id: string): string | null {
     }
     return null;
   };
-  return (
+  const treeResult =
     search(coreNavItems, null) ??
     search(toolsNavItems, null) ??
     search(settingsNavItems, null) ??
-    search(pluginNavItems, null)
-  );
+    search(pluginNavItems, null);
+  if (treeResult) return treeResult;
+
+  const deepItem = deepPages.find((item) => item.id === id);
+  if (deepItem) {
+    const parent = getAllNavItems().find(
+      (item) =>
+        item.href !== deepItem.href &&
+        deepItem.href.startsWith(item.href + "/") &&
+        item.pluginId
+    );
+    if (parent) return findAncestorLabel(parent.id) ?? parent.label;
+  }
+
+  return null;
 }
 
 function toLabel(slug: string): string {
