@@ -47,7 +47,9 @@ export default function NavItem({
   const { activeSource, setActiveSource } = useActiveSource();
   const hasChildren = item.children && item.children.length > 0;
   const isActive =
-    !hasChildren && pathname === item.href && activeSource !== "favorites";
+    !hasChildren &&
+    isPathMatch(item.href, pathname) &&
+    activeSource !== "favorites";
   const childActive = hasChildren ? isDescendantActive(item, pathname) : false;
 
   const isControlled = expanded !== undefined;
