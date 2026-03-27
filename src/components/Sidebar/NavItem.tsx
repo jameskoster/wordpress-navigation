@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ChevronRight } from "lucide-react";
 import type { NavItem as NavItemType } from "@/types/navigation";
+import { isSidebarLeafActive } from "@/data/navigation";
 import { useActiveSource } from "@/hooks/useActiveSource";
 import styles from "./Sidebar.module.css";
 
@@ -48,7 +49,7 @@ export default function NavItem({
   const hasChildren = item.children && item.children.length > 0;
   const isActive =
     !hasChildren &&
-    isPathMatch(item.href, pathname) &&
+    isSidebarLeafActive(item, pathname) &&
     activeSource !== "favorites";
   const childActive = hasChildren ? isDescendantActive(item, pathname) : false;
   const childActiveStyle =

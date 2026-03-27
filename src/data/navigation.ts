@@ -529,6 +529,29 @@ export function getAllNavItems(): NavItem[] {
   return [...getSidebarNavItems(), ...deepPages];
 }
 
+function pathMatchesHref(href: string, pathname: string): boolean {
+  return pathname === href || pathname.startsWith(href + "/");
+}
+
+const sidebarLeafItems: NavItem[] = (() =>
+  getSidebarNavItems().filter((i) => !i.children?.length))();
+
+/**
+ * Whether a leaf nav item should show active state for this pathname.
+ * Picks the longest matching href among sidebar leaves so e.g. /posts does not
+ * stay active on /posts/categories (All Posts vs Categories).
+ */
+export function isSidebarLeafActive(item: NavItem, pathname: string): boolean {
+  if (item.children?.length) return false;
+  if (!pathMatchesHref(item.href, pathname)) return false;
+  for (const other of sidebarLeafItems) {
+    if (other.id === item.id) continue;
+    if (other.href.length <= item.href.length) continue;
+    if (pathMatchesHref(other.href, pathname)) return false;
+  }
+  return true;
+}
+
 export function findNavItemByHref(href: string): NavItem | undefined {
   const all = getAllNavItems();
   return all.find((item) => item.href === href);
