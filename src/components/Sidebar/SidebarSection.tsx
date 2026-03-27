@@ -12,6 +12,7 @@ interface SidebarSectionProps {
   expanded?: boolean;
   onToggle?: () => void;
   badge?: number;
+  active?: boolean;
 }
 
 export default function SidebarSection({
@@ -22,6 +23,7 @@ export default function SidebarSection({
   expanded,
   onToggle,
   badge,
+  active,
 }: SidebarSectionProps) {
   const [localExpanded, setLocalExpanded] = useState(defaultExpanded);
   const isControlled = expanded !== undefined;
@@ -39,7 +41,7 @@ export default function SidebarSection({
     <div className={styles.section}>
       <div className={styles.sectionHeader}>
         <button
-          className={styles.sectionToggle}
+          className={`${styles.sectionToggle} ${active && !isExpanded ? styles.sectionToggleActive : ""}`}
           onClick={handleToggle}
         >
           <span className={styles.sectionLabel}>{label}</span>

@@ -353,7 +353,8 @@
   transition: color 0.1s;
 }
 
-.sectionToggle:hover {
+.sectionToggle:hover,
+.sectionToggleActive {
   color: var(--sidebar-text-hover);
 }
 

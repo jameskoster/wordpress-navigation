@@ -69,6 +69,7 @@ export default function Sidebar() {
             expanded={expandedPinned === "plugins"}
             onToggle={() => togglePinned("plugins")}
             badge={totalBadges(pluginNavItems)}
+            active={pathname.startsWith("/plugins/")}
           >
             <AccordionNav items={pluginNavItems} depth={1} />
           </SidebarSection>
@@ -77,6 +78,7 @@ export default function Sidebar() {
             label="Tools"
             expanded={expandedPinned === "tools"}
             onToggle={() => togglePinned("tools")}
+            active={pathname.startsWith("/tools/")}
           >
             <ul className={styles.navList}>
               {toolsNavItems.map((item) => (
@@ -89,6 +91,7 @@ export default function Sidebar() {
             label="Settings"
             expanded={expandedPinned === "settings"}
             onToggle={() => togglePinned("settings")}
+            active={pathname.startsWith("/settings/")}
           >
             <AccordionNav items={settingsNavItems} depth={1} />
           </SidebarSection>
