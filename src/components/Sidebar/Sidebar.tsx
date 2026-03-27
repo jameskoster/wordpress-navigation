@@ -9,6 +9,7 @@ import {
   pluginNavItems,
 } from "@/data/navigation";
 import { useHiddenItems } from "@/hooks/useHiddenItems";
+import { useActiveSource } from "@/hooks/useActiveSource";
 import NavItem from "./NavItem";
 import SidebarSection from "./SidebarSection";
 import FavoritesSection from "./FavoritesSection";
@@ -42,6 +43,7 @@ export default function Sidebar() {
   const pathname = usePathname();
   const [expandedPinned, setExpandedPinned] = useState<PinnedSection>(() => getInitialPinned(pathname));
   const { isHidden } = useHiddenItems();
+  const { activeSource } = useActiveSource();
 
   const togglePinned = (section: PinnedSection) => {
     setExpandedPinned((prev) => (prev === section ? null : section));
@@ -69,7 +71,10 @@ export default function Sidebar() {
             expanded={expandedPinned === "plugins"}
             onToggle={() => togglePinned("plugins")}
             badge={totalBadges(pluginNavItems)}
-            active={pathname.startsWith("/plugins/")}
+            active={
+              pathname.startsWith("/plugins/") &&
+              activeSource !== "favorites"
+            }
           >
             <AccordionNav items={pluginNavItems} depth={1} />
           </SidebarSection>
@@ -78,7 +83,9 @@ export default function Sidebar() {
             label="Tools"
             expanded={expandedPinned === "tools"}
             onToggle={() => togglePinned("tools")}
-            active={pathname.startsWith("/tools/")}
+            active={
+              pathname.startsWith("/tools/") && activeSource !== "favorites"
+            }
           >
             <ul className={styles.navList}>
               {toolsNavItems.map((item) => (
@@ -91,7 +98,10 @@ export default function Sidebar() {
             label="Settings"
             expanded={expandedPinned === "settings"}
             onToggle={() => togglePinned("settings")}
-            active={pathname.startsWith("/settings/")}
+            active={
+              pathname.startsWith("/settings/") &&
+              activeSource !== "favorites"
+            }
           >
             <AccordionNav items={settingsNavItems} depth={1} />
           </SidebarSection>

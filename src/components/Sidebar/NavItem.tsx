@@ -51,6 +51,8 @@ export default function NavItem({
     isPathMatch(item.href, pathname) &&
     activeSource !== "favorites";
   const childActive = hasChildren ? isDescendantActive(item, pathname) : false;
+  const childActiveStyle =
+    childActive && activeSource !== "favorites";
 
   const isControlled = expanded !== undefined;
   const [localExpanded, setLocalExpanded] = useState(childActive);
@@ -103,7 +105,7 @@ export default function NavItem({
     return (
       <li className={styles.navItemWrapper}>
         <button
-          className={`${styles.navFolder} ${childActive ? styles.navFolderActive : ""}`}
+          className={`${styles.navFolder} ${childActiveStyle ? styles.navFolderActive : ""}`}
           onClick={handleToggle}
         >
           <span className={styles.navItemLabel}>{item.label}</span>
@@ -125,7 +127,7 @@ export default function NavItem({
     return (
       <li className={styles.navItemWrapper}>
         <button
-          className={`${styles.navItem} ${childActive ? styles.navItemChildActive : ""}`}
+          className={`${styles.navItem} ${childActiveStyle ? styles.navItemChildActive : ""}`}
           onClick={handleToggle}
           style={folderIndent}
         >
